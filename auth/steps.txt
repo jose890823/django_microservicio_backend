@@ -1,0 +1,8 @@
+Pasos de configuracion: 
+    1. Crear el dockerfile
+    2. Crear el requirments.txt
+    3. Crear el docker-compose.yaml
+    3.1. En la configuracion del docker-compose esta comentariado el servicio de kafka porque al inicio de toda la configuracion 
+        no se esta usando por lo tanto se comentarea hasta que todo este funcionando bien.
+    3.2. Crear el archivo consumer.py que es el que posee la configuracion que va a consumir los mensajes de kafka
+    4. Una vez configurado todo ejecutar el comando "docker-compose build"
