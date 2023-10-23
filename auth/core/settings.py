@@ -1,6 +1,6 @@
-from pathlib import Path
-import os
 import environ
+import os
+from pathlib import Path
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -8,9 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Configurando una manera de poder usar env
 env = environ.Env()
-environ.Env.read_env()
-
-SECRET_KEY = env('SECRET_KEY')
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG')
@@ -60,7 +59,10 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'apps.user',
+    'apps.user_profile'
+]
 
 THIRD_PARTY_APPS = [
     'corsheaders',
@@ -129,7 +131,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'db',
-        'PORT': '5435'
+        'PORT': '5432'
     }
 }
 
@@ -138,7 +140,7 @@ CACHES = {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://django_auth_api_redis:6379',
         'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis_client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
 }
@@ -147,10 +149,10 @@ CACHES = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher"
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher"
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher"
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher"
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -222,7 +224,7 @@ SIMPLE_JWT = {
     )
 }
 
-# AUTH_USER_MODEL = 'user.UserAccount'
+AUTH_USER_MODEL = 'user.UserAccount'
 
 #Djoser
 DJOSER = {
@@ -260,8 +262,8 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
-POLYGON_RPC=env('POLYGON_RPC')
-ETHEREUM_RPC=env('ETHEREUM_RPC')
+# POLYGON_RPC=env('POLYGON_RPC')
+# ETHEREUM_RPC=env('ETHEREUM_RPC')
 
 if not DEBUG:
     # CSRF_COOKIE_DOMAIN = os.environ.get('CSRF_COOKIE_DOMAIN_DEPLOY')

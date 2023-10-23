@@ -38,6 +38,7 @@ Pillow==9.2.0
 
 # Para la comunicacion con postgresql
 psycopg2==2.9.4
+psycopg-binary==3.1.12
 
 # Para hacer slug
 python-slugify==6.1.2
