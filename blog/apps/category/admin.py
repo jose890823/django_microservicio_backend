@@ -6,7 +6,7 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'title', 'slug')
     list_filter = ('parent',)
     autocomplete_fields = ('parent',)
-    prepopulated_fields = {"slug": ("name",)}
+    prepopulated_fields = {"slug": ("name",)} #Esto lo que hace es que cuando estas escribiendo el nombre de la categoria en el admin, se llena automaticamente el slug
     readonly_fields = ('views',)
 
 class ViewCountAdmin(admin.ModelAdmin):

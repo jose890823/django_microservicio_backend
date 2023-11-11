@@ -70,6 +70,7 @@ with closing(consumer):
             value = msg.value()
 
             data = json.loads(value)
+            print(f'Got this message with Topic: {topic} and value: {value}, with Data: {data}')
             
             if topic == os.environ.get('KAFKA_TOPIC'):
                 if msg.key() == b'create_user':
